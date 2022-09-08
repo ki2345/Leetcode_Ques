@@ -1,0 +1,17 @@
+// Leetcode 94
+// Binary Tree Inorder Traversal -- Easy
+// using recursive method
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        insert(root,res);
+        return res;
+    }
+    public void insert(TreeNode root, List<Integer> res){
+        if(root!= null){
+            insert(root.left,res);
+            res.add(root.val);
+            insert(root.right,res);
+        }
+    }
+}
