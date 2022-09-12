@@ -1,0 +1,19 @@
+// Leetcode 108
+// Convert sorted array to Binary Search Tree - Easy
+//Using recursion
+ public TreeNode sorted(int[] nums, int left, int right){
+        if(left == right)
+            return new TreeNode(nums[left]);
+        else if(left > right)
+            return null;
+        else{
+            int mid = (left + right) / 2;
+            TreeNode currnode = new TreeNode(nums[mid]);
+            currnode.left = sorted(nums, left, mid-1);
+            currnode.right = sorted(nums, mid+1, right);
+            return currnode;
+        }
+    }
+public TreeNode sortedArrayToBST(int[] nums) {
+    return sorted(nums, 0, nums.length-1);
+}
