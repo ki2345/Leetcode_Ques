@@ -1,0 +1,22 @@
+// Leetcode 2007
+// Find Original Array From Doubled Array -- Medium
+// solved using queue
+ public int[] findOriginalArray(int[] changed) {
+        int n = changed.length;
+        int[] temp = new int[n/2];
+        Queue<Integer> q = new LinkedList<>();
+        Arrays.sort(changed);
+        int i = 0;
+        for(int num : changed){
+            if(!q.isEmpty() && q.peek() == num){
+                temp[i] = q.poll()/2;
+                i++;
+            }
+            else 
+                q.add(num*2);
+        }
+        if(q.size() > 0) 
+            return new int[]{};
+        else
+            return temp;
+    }
