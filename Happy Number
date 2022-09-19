@@ -1,0 +1,19 @@
+// LeetCode 202
+// Happy Number -- easy
+// solved using basic mathematical and arraylist
+ public boolean isHappy(int n) {
+        ArrayList<Integer> res = new ArrayList<>();
+        while(n != 1){
+            int temp = n;
+            n = 0;
+            while(temp > 0){
+                n = n + (int)Math.pow((temp % 10),2);
+                temp /= 10;
+            }
+            if(res.contains(n))
+                return false;
+            else
+                res.add(n);
+        }
+        return true;
+    }
