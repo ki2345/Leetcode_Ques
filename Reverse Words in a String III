@@ -1,0 +1,9 @@
+// LeetCode 557
+// Reverse Words in a String III -- Easy
+public String reverseWords(String s) {
+        String res = "";
+        for(String str : s.split(" ")) 
+            res += new StringBuilder(str).reverse().toString()+" ";
+        return res.trim();
+        
+    }
