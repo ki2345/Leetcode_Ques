@@ -1,0 +1,34 @@
+// LeetCode 647
+// Palindromic Substrings -- Medium
+ public int countSubstrings(String str) {
+        int count = 0;
+        // odd length palindromic substrings 
+        for(int middle=0;middle<str.length();middle++)
+        {
+            int left = middle - 1;
+            int right = middle + 1;
+            int currans = 1;
+            while(left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right))
+            {
+                currans++;
+                left--;
+                right++;
+            }
+            count += currans;
+        }
+        // even length palindromic substrings
+        for(int middle=0;middle<str.length();middle++)
+        {
+            int left = middle;
+            int right = middle + 1;
+            int currans = 0;
+            while(left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right))
+            {
+                currans++;
+                left--;
+                right++;
+            }
+            count += currans;
+        }
+        return count;
+    }
