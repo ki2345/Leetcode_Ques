@@ -1,0 +1,14 @@
+// LeetCode 590
+// N-ary Tree Postorder Traversal -- Easy
+// solved using recursion
+class Solution {
+    List<Integer> res = new ArrayList<>();
+    public List<Integer> postorder(Node root) {
+        if (root == null)
+            return res;       
+        for(Node temp : root.children)
+            postorder(temp);
+        res.add(root.val);
+        return res;
+    }
+}
