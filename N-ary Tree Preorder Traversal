@@ -1,0 +1,17 @@
+// LeetCode 589
+// N-ary Tree Preorder Traversal -- Easy
+// solved using recursion
+public List<Integer> preorder(Node root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null) 
+            return res;
+        preorder(res, root);
+        return res;
+    }
+    public void preorder(List<Integer> res,Node root){
+        if(root == null)
+            return ;
+        res.add(root.val);
+        for(Node temp : root.children)
+            preorder(res, temp);
+    }
