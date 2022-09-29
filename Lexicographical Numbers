@@ -1,0 +1,25 @@
+// LeetCode 386
+// Lexicographical Numbers -- Medium
+// solved using recursion
+class Solution {
+    public List<Integer> lexicalOrder(int n) {
+        List<Integer> res = new ArrayList<>();
+        Lexico_counting(0,n,res);
+        return res;
+    }
+    public static void Lexico_counting(int curr, int n, List<Integer> res){
+        if(curr > n){
+            return;
+        }
+        //System.out.println(curr);
+        int i = 0;
+        if(curr == 0){
+            i = 1;
+        }
+        if(curr != 0)
+            res.add(curr);
+        for(;i<=9;i++){
+            Lexico_counting(curr*10+i, n, res);
+        }
+    }
+}
