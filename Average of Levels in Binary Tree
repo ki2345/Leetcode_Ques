@@ -1,0 +1,26 @@
+// LeetCode 637
+// Average of Levels in Binary Tree -- Easy
+// solved using queue
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> res = new ArrayList<>();
+        Queue <TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            double sum = 0, count = 0;
+            Queue<TreeNode> temp = new LinkedList<>();
+            while(!q.isEmpty()){
+                TreeNode x = q.remove();
+                sum += x.val;
+                count++;
+                if(x.left != null)
+                    temp.add(x.left);
+                if(x.right != null)
+                    temp.add(x.right);
+            }
+            q = temp;
+            res.add(sum / count);
+        }
+        return res;
+    }
+}
