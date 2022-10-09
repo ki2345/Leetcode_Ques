@@ -1,0 +1,27 @@
+// LeetCode 653
+// Two Sum IV - Input is a BST -- Easy
+// solved using recursion
+class Solution {
+    ArrayList<Integer> res =  new ArrayList<Integer>();
+    public void traverse(TreeNode r){
+        if(r == null)
+            return;
+        traverse(r.left);
+        res.add(r.val);
+        traverse(r.right);
+        return;
+    }
+    public boolean findTarget(TreeNode root, int k) {
+        traverse(root);
+        int i = 0, j = res.size()-1;
+        while(i < j){
+            if(res.get(i) + res.get(j) == k)
+                return true;
+            else if(res.get(i) + res.get(j) > k)
+                j--;
+            else
+                i++;
+        }
+        return false;
+    }
+}
