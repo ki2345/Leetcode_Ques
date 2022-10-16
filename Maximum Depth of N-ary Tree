@@ -1,0 +1,14 @@
+// LeetCode 559
+// Maximum Depth of N-ary Tree -- Easy
+// solved using recursion
+class Solution {
+    public int maxDepth(Node root) {
+        if(root == null)
+            return 0;
+        int d = 0; // d -- depth
+        for(Node temp : root.children){
+            d = Math.max(d,maxDepth(temp));
+        }
+        return d+1;
+    }
+}
