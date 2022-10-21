@@ -1,0 +1,19 @@
+// LeetCode 219
+// Contains Duplicate II -- Easy
+// solved using HashMap
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer,Integer> map = new HashMap();
+        for (int index=0;index<nums.length;index++){
+            int i = index;
+            if (map.containsKey(nums[index])) {
+                int j = map.get(nums[index]);
+                int diff = i - j;
+                if (diff <= k) 
+                    return true;
+            }
+            map.put(nums[index], i);
+        }
+        return false;
+    }
+}
