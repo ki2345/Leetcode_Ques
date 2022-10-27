@@ -1,0 +1,12 @@
+// LeetCode 2446
+// Determine if Two Events Have Conflict -- Easy
+class Solution {
+    public boolean haveConflict(String[] event1, String[] event2) {
+        int x = event1[0].compareTo(event2[1]);
+        int y = event1[1].compareTo(event2[0]);
+        if((x <= 0) && (y >= 0))
+            return true;
+        else
+            return false;
+    }
+}
