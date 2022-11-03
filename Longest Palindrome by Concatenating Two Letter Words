@@ -1,0 +1,45 @@
+//Leetcode 2131
+// Longest Palindrome by Concatenating Two Letter Words
+// solved using hashmap
+class Solution {
+    public int longestPalindrome(String[] words) {
+        int len = 0;
+        int count = 0;
+        HashMap<String,Integer> map = new HashMap<>();
+        for(int i=0;i<words.length;i++){
+            String str = words[i].charAt(1) + "" + words[i].charAt(0);
+            if(str.equals(words[i]) == true){
+                if(map.containsKey(str) == true){
+                    count--;
+                    len += 4;
+                    map.remove(str);
+                }
+                else{
+                    count++;
+                    map.put(str,1);
+                }
+            }
+            else{
+                int s = map.getOrDefault(str,0);
+                if(s == 0){
+                    int k = map.getOrDefault(words[i],0);
+                    k++;
+                    map.put(words[i],k);
+                }
+                else{
+                    s--;
+                    len += 4;
+                    if(s == 0){
+                        map.remove(str);
+                    }
+                    else{
+                        map.put(str,s);
+                    }
+                }
+            }
+        }
+        if(count > 0)
+            len += 2;
+        return len;
+    }
+}
