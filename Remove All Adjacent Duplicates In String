@@ -1,0 +1,17 @@
+// LeetCode 1047
+// Remove All Adjacent Duplicates In String -- Easy
+// solved using StringBuilder
+class Solution {
+    public String removeDuplicates(String s) {
+        StringBuilder res = new StringBuilder();
+        for (char ch : s.toCharArray()) {
+            int size = res.length();
+            if (size > 0 && res.charAt(size - 1) == ch) { 
+                res.deleteCharAt(size - 1); 
+            }else { 
+                res.append(ch); 
+            }
+        }
+        return res.toString();
+    }
+}
