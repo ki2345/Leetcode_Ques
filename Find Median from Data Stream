@@ -1,0 +1,30 @@
+// LeetCode 295
+// Find Median from Data Stream -- Hard
+class MedianFinder {
+    List<Integer> l; 
+    public MedianFinder() {
+        this.l = new ArrayList<Integer>();
+    }
+    
+    public void addNum(int num) {
+        if(l.size() == 0) 
+            l.add(0, num);  
+        else{
+            int i = 0;
+            while(l.get(i) <= num && i < l.size()-1) 
+                i++;
+            if(l.get(i) <= num) 
+                l.add(i+1, num);
+            else 
+                l.add(i, num);
+        }
+    }
+    public double findMedian() {
+        int n = l.size();
+        if(n == 0) 
+            return 0;
+        if(n % 2 == 1) 
+            return l.get(n/2);
+        return (double)((l.get(n/2) + l.get(n/2 - 1)))/2;
+    }
+}
