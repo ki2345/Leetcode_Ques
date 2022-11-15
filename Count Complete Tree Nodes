@@ -1,0 +1,12 @@
+// LeetCode 222
+// Count Complete Tree Nodes -- Medium
+class Solution {
+    public int countNodes(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int leftnodes = countNodes(root.left);
+        int rightnodes = countNodes(root.right);
+        return leftnodes + rightnodes + 1;
+    }
+}
