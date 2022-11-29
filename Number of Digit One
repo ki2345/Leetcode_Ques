@@ -1,0 +1,22 @@
+//LeetCode 233
+//Number of Digit One -- Hard
+class Solution {
+    public int countDigitOne(int n) {
+        if (n <= 0) 
+            return 0;
+        int temp = n;
+        int x = 1;
+        int count = 0;
+        do {
+            int rem = temp % 10;
+            temp /= 10;
+            count += temp * x;
+            if(rem == 1)
+                count += n % x + 1;
+            if(rem > 1)
+                count += x;
+            x *= 10;
+        } while(temp > 0);
+        return count;
+    }
+}
