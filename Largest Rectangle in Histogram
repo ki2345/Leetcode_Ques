@@ -1,0 +1,38 @@
+//LeetCode 84
+// Largest Rectangle in Histogram -- Hard
+// solved using stack
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        return Area(heights);
+    }
+    public static int Area(int[] arr){
+        int maxarea = 0;
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[i] < arr[st.peek()]){
+                int h = arr[st.pop()];
+                int r = i;
+                if(st.isEmpty()){
+                    maxarea = Math.max(maxarea,h*r);
+                }
+                else{
+                    int l = st.peek();
+                    maxarea = Math.max(maxarea,h*(r-l-1));
+                }
+            }
+            st.push(i);
+        }
+        int r = arr.length;
+        while(!st.isEmpty()){
+                int h = arr[st.pop()];
+                if(st.isEmpty()){
+                    maxarea = Math.max(maxarea,h*r);
+                }
+                else{
+                    int l = st.peek();
+                    maxarea = Math.max(maxarea,h*(r-l-1));
+                }
+        }
+        return maxarea;
+    }
+}
