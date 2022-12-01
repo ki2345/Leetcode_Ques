@@ -1,0 +1,23 @@
+//LeetCode 1063
+//Number of Valid Subarrays -- Hard
+//solved using stack
+import java.util.Stack;
+
+public class Number_of_valid_subarrays {
+    public static void main(String[] args) {
+        int[] arr = {1,4,2,5,3};
+        System.out.println(subarray(arr));
+    }
+    public static int subarray(int[] arr){
+        int ans = 0;
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[i] < st.peek()){
+                st.pop();
+            }
+            st.push(arr[i]);
+            ans += st.size();
+        }
+        return ans;
+    }
+}
