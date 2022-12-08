@@ -1,0 +1,27 @@
+//LeetCode 872
+//Leaf-Similar Trees -- Easy
+//solved using recursion
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        Stack<TreeNode> st1 = new Stack<>();
+        Stack<TreeNode> st2 = new Stack<>();
+        st1.push(root1);
+        st2.push(root2);
+        while(!st1.isEmpty() && !st2.isEmpty()){
+            if(helper(st1) != helper(st2))
+                return false;
+        }
+        return st1.isEmpty() && st2.isEmpty();
+    }
+    public int helper(Stack<TreeNode> st){
+        while(true){
+            TreeNode temp = st.pop();
+            if(temp.right != null)
+                st.push(temp.right);
+            if(temp.left != null)
+                st.push(temp.left);
+            if(temp.left == null && temp.right == null)
+                return temp.val;
+        }
+    }
+}
