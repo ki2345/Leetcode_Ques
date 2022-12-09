@@ -1,0 +1,21 @@
+//LeetCode 1026
+//Maximum Difference Between Node and Ancestor -- Medium
+//solved using recursion
+class Solution {
+    public int maxAncestorDiff(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return Max_diff(root,root.val,root.val);
+    }
+    public static int Max_diff(TreeNode node, int currmax, int currmin){
+        if(node == null){
+            return currmax - currmin;
+        }
+        currmax = Math.max(currmax,node.val);
+        currmin = Math.min(currmin,node.val);
+        int leftroot = Max_diff(node.left,currmax,currmin);
+        int rightroot = Max_diff(node.right,currmax,currmin);
+        return Math.max(leftroot,rightroot);
+    }
+}
