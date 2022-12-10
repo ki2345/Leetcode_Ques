@@ -1,0 +1,26 @@
+//LeetCode 1339
+//Maximum Product of Splitted Binary Tree -- Medium
+//solved using recursion
+class Solution {
+    static int mod = 1000000007;
+    public int maxProduct(TreeNode root) {
+        List<Long> res = new ArrayList<>();
+        long tl = helper(root,res);
+        long maxsum = 0;
+        for(long s : res){
+            long p = s * (tl - s);
+            maxsum = Math.max(maxsum,p);
+        }
+        return (int)(maxsum % mod);
+    }
+    public static long helper(TreeNode node, List<Long> res){
+        if(node == null){
+            return 0;
+        }
+        long leftnode = helper(node.left,res);
+        long rightnode = helper(node.right,res);
+        long sum = leftnode + rightnode + node.val;
+        res.add(sum);
+        return sum;
+    }
+}
