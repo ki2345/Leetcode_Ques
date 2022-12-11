@@ -1,0 +1,24 @@
+//LeetCode 456
+//132 Pattern -- Medium
+//solved using stack
+class Solution {
+    public boolean find132pattern(int[] nums) {
+        int[] min = new int[nums.length];
+        min[0] = nums[0];
+        for(int i=1;i<min.length;i++){
+            min[i] = Math.min(min[i-1],nums[i]);
+        }
+        Stack<Integer> st = new Stack<Integer>();
+        for(int j=nums.length-1;j>=0;j--){
+            int ith = min[j];
+            while(!st.isEmpty() && ith >= nums[st.peek()]){
+                st.pop();
+            }
+            if(!st.isEmpty() && nums[j] > nums[st.peek()]){
+                return true;
+            }
+            st.push(j);
+        }
+        return false;
+    }
+}
