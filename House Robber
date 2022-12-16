@@ -1,0 +1,15 @@
+//LeetCode 198
+//House Robber -- Medium
+class Solution {
+    public int rob(int[] nums) {
+        int r1 = 0;
+        int r2 = 0;
+        int max = 0;
+        for(int element : nums){
+            max = Math.max(element + r1, r2);
+            r1 = r2;
+            r2 = max;
+        }
+        return max;
+    }
+}
