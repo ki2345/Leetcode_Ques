@@ -1,0 +1,22 @@
+//LeetCode 49
+//Group Anagram -- Medium
+//solved using hashmap
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> res = new ArrayList<>();
+        Map<String,List<String>> m = new HashMap<>();
+        for(int i=0;i<strs.length;i++){
+            char[] ch = strs[i].toCharArray();
+            Arrays.sort(ch);
+            String s = new String(ch);
+            if(!m.containsKey(s)){
+                m.put(s,new ArrayList<>());
+            }
+            m.get(s).add(strs[i]);
+        } 
+        for(String str : m.keySet()){
+            res.add(m.get(str));
+        }
+        return res;
+    }
+}
