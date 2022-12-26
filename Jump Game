@@ -1,0 +1,14 @@
+//LeetCode 55
+//Jump Game -- Medium
+class Solution {
+    public boolean canJump(int[] nums) {
+        int lastindex = 0;
+        for(int i=0;i<=lastindex;i++){
+            lastindex = Math.max(lastindex,i+nums[i]);
+            if(lastindex >= nums.length-1){
+                return true;
+            }
+        }
+        return false;
+    }
+}
