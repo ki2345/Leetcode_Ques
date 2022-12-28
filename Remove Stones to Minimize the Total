@@ -1,0 +1,18 @@
+//LeetCode 1962
+//Remove Stones to Minimize the Total -- Medium
+class Solution {
+    public int minStoneSum(int[] piles, int k) {
+        PriorityQueue<Integer> que = new PriorityQueue<>(Collections.reverseOrder());
+        int res = 0;
+        for(int p : piles) {
+            que.add(p);
+            res += p;
+        }
+        while(k-- > 0) {
+            int x = que.poll();
+            que.add(x - x / 2);
+            res -= x / 2;
+        }
+        return res;
+    }
+}
