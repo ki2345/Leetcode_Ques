@@ -1,0 +1,31 @@
+//LeetCode 515
+//Find Largest Value in Each Tree Row -- Medium
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        int size = 0;
+        int maxval = Integer.MIN_VALUE;
+        if(root == null){
+            return res;
+        }
+        q.add(root);
+        while(!q.isEmpty()){
+            size = q.size();
+            maxval = Integer.MIN_VALUE;
+            while(size != 0){
+                TreeNode poll = q.poll();
+                maxval = Math.max(maxval,poll.val);
+                if(poll.left != null){
+                    q.add(poll.left);
+                }
+                if(poll.right != null){
+                    q.add(poll.right);
+                }
+                size--;
+            }
+            res.add(maxval);
+        }
+        return res;
+    }
+}
