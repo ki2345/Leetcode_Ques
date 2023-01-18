@@ -1,0 +1,21 @@
+//LeetCode 918
+//Maximum Sum Circular Subarray -- Medium
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
+        int totalsum = 0;
+        int maxsum = nums[0];
+        int currmax = 0;
+        int minsum = nums[0];
+        int currmin = 0;
+        for(int i : nums){
+            //Max value of Max subarray sum
+            currmax = Math.max(currmax + i, i);
+            maxsum = Math.max(maxsum, currmax);
+            //Min value of Min subarray sum
+            currmin = Math.min(currmin + i, i);
+            minsum = Math.min(minsum, currmin);
+            totalsum += i;
+        }
+        return maxsum > 0 ? Math.max(maxsum, (totalsum - minsum)) : maxsum;
+    }
+}
