@@ -1,0 +1,23 @@
+//LeetCode 491
+//Non-decreasing Subsequences -- Medium
+class Solution {
+     HashSet<List<Integer>> set = new HashSet<>();
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        List<Integer> al = new ArrayList<>();
+        helper(al,0,nums);
+        List<List<Integer>> res = new ArrayList<>(set);
+        return res;
+    }
+    public void helper(List<Integer> al,int index,int[] nums){
+        if(al.size() >= 2){
+            set.add(new ArrayList<>(al));
+        }
+        for(int i=index;i<nums.length;i++){
+            if(al.size() == 0 || nums[i] >= al.get(al.size()-1)){
+                al.add(nums[i]);
+                helper(al, i+1, nums);
+                al.remove(al.size()-1);
+            }
+        }
+    }
+}
