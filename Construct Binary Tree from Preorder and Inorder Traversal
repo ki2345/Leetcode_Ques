@@ -1,0 +1,26 @@
+//LeetCode 105
+//Construct Binary Tree from Preorder and Inorder Traversal -- Medium
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return createTree(inorder,0,inorder.length-1,preorder,0,preorder.length-1);
+    }
+    private TreeNode createTree(int[] inorder, int i, int j, int[] preorder, int s, int e){
+        if(i > j || s > e){
+            return null;
+        }
+        TreeNode nn = new TreeNode(preorder[s]);
+        int idx = search(inorder,i,j,preorder[s]);
+        int net = idx - i;
+        nn.left = createTree(inorder,i,idx-1,preorder,s+1,s+net);
+        nn.right = createTree(inorder,idx+1,j,preorder,s+net+1,e);
+        return nn;
+    }
+    public int search(int[] in, int si, int ei, int key){
+        for(int i=si;i<=ei;i++){
+            if(in[i] == key){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
