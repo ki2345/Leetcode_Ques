@@ -1,0 +1,34 @@
+//LeetCode 1373
+//Maximum Sum BST in Binary Tree -- Hard
+class Solution {
+    class BSTpair{
+    boolean isBST = true;
+    long min = Long.MAX_VALUE;
+    long max = Long.MIN_VALUE;
+    int sum = 0;//bt sum
+}
+ int ans = 0;//bst ans
+    public int maxSumBST(TreeNode root) {
+        helper(root);
+        return ans;
+    }
+    public BSTpair helper(TreeNode root){
+        if(root == null){
+            return new BSTpair();
+        }
+        BSTpair lbp = helper(root.left);
+        BSTpair rbp = helper(root.right);
+        BSTpair selfbp = new BSTpair();
+        selfbp.max = Math.max(lbp.max,Math.max(rbp.max,root.val));
+        selfbp.min = Math.min(lbp.min,Math.min(rbp.min,root.val));
+        if(lbp.isBST && rbp.isBST && lbp.max < root.val && rbp.min > root.val){
+            selfbp.sum = root.val + lbp.sum + rbp.sum;
+            ans = Math.max(ans,selfbp.sum);
+        }
+        else{
+            selfbp.isBST = false;
+            selfbp.sum = Math.max(lbp.sum,rbp.sum);
+        }
+        return selfbp;
+    }
+}
