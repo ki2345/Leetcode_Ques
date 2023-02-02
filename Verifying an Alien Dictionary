@@ -1,0 +1,30 @@
+//LeetCode 953
+//Verifying an Alien Dictionary -- Easy
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+        for(int i=0;i<words.length-1;i++){
+            String w1 = words[i];
+            String w2 = words[i+1];
+            //finding the max len for traversing
+            int len = Math.max(w1.length(), w2.length());
+            for(int j=0;j<len;j++){
+                //as the index starts from 0
+                int i1 = -1;
+                int i2 = -1;
+                //getting the order
+                if(j < w1.length())
+                    i1 = order.indexOf(w1.charAt(j));
+                if(j < w2.length())
+                    i2 = order.indexOf(w2.charAt(j));
+                //order of w1 is less than w2, then break.
+                //as its in lexographic order
+                if(i1 < i2)
+                    break;
+                //if word 2's order is larger than word 1 order
+                else if(i2 < i1)
+                    return false;
+            }
+        }
+        return true;
+    }
+}
