@@ -1,0 +1,32 @@
+//LeetCode 904
+//Fruit Into Baskets -- Medium
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int count[] = new int [fruits.length];//frequency array
+        int type = 0;//to count the type of tree
+        int max = 0;
+        int currmax = 0;
+        int start = 0;
+        for(int i = 0; i < fruits.length; i++){
+            if(count[fruits[i]]==0){
+                type++;
+            }
+            //update the frequency of that element and increase the currmax
+            count[fruits[i]]++;
+            currmax++;
+            while(type > 2 && start < i){
+                count[fruits[start]]--;
+                if(count[fruits[start]] == 0){
+                    type--;
+                }
+                //increase the start because new element is added 
+                start++;
+                //decrease the curr max by 1 because first fruit is removed
+                currmax--;
+            }
+            //store the maximum of currmax and max
+            max = Math.max(max,currmax);
+        }
+        return max;
+    }
+}
