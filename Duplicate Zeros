@@ -1,0 +1,28 @@
+//LeetCode 1089
+//Duplicate Zeros -- Easy
+class Solution {
+    public void duplicateZeros(int[] arr) {
+        int n = arr.length;
+        int[] res = new int[n];
+        int i = 0;
+        int j = 0;
+        while(j < res.length && i < n) {
+            if(arr[i] == 0) {
+                res[j] = 0;
+                if(j+1 < arr.length) {
+                    res[j+1] = 0;
+                }
+                j += 2;
+                i++;
+            } 
+            else {
+                res[j] = arr[i];
+                i++;
+                j++;
+            }
+        }
+        for(int k=0;k<n;k++) {
+            arr[k] = res[k];
+        }
+    }
+}
