@@ -1,0 +1,15 @@
+//LeetCode 1523
+//Count Odd Numbers in an Interval Range -- Easy
+class Solution {
+    public int countOdds(int low, int high) {
+        int total = high - low + 1; //for total no. of integers in the range
+        if(total % 2 == 0)
+            return total / 2;
+        else{
+            if(low % 2 != 0)
+                return total / 2 + 1;
+            else
+                return total / 2;
+        }
+    }
+}
