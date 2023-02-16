@@ -1,0 +1,15 @@
+//LeetCode 105
+//Maximum Depth of Binary Tree -- Easy
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int lh = maxDepth(root.left) + 1;
+        int rh = maxDepth(root.right) + 1;
+        if(lh > rh)
+            return lh;
+        else
+            return rh;
+    }
+}
