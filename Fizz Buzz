@@ -1,0 +1,18 @@
+//LeetCode 412
+//Fizz Buzz -- Easy
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        List<String> lstr = new ArrayList<>();
+        for(int i=1;i<=n;i++){
+            if(i % 15 == 0)
+                lstr.add("FizzBuzz");
+            else if(i % 3 == 0)
+                lstr.add("Fizz");
+            else if(i % 5 == 0)
+                lstr.add("Buzz");
+            else
+                lstr.add(String.valueOf(i)); // converts char array to string like 1 to "1"
+        }
+        return lstr;
+    }
+}
