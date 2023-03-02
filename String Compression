@@ -1,0 +1,25 @@
+//LeetCode 443
+//String Compression -- Medium
+class Solution {
+    public int compress(char[] chars) {
+        int i = 0;
+        int count = 0;
+        while(i < chars.length)
+        {
+            int j = i;
+            while(j < chars.length && chars[i] == chars[j])
+            {
+              j++;  
+            }
+            chars[count] = chars[i];
+            count++;
+            if(j-i > 1){
+                String res = j-i + ""; 
+                for(char ch : res.toCharArray())
+                    chars[count++] = ch;
+            }
+            i = j;   
+        }
+        return count;
+    }
+}
