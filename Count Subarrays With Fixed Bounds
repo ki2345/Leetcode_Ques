@@ -1,0 +1,23 @@
+//LeetCode 2444
+//Count Subarrays With Fixed Bounds -- Hard
+class Solution {
+    public long countSubarrays(int[] nums, int minK, int maxK) {
+        long count = 0;
+        int lmax = -1;
+        int lmin = -1;
+        int lb = -1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] >= minK && nums[i] <= maxK){
+                lmin = (nums[i] == minK) ? i : lmin;
+                lmax = (nums[i] == maxK) ? i : lmax;
+                count += Math.max(0, Math.min(lmin,lmax) - lb);
+            }
+            else{
+                lb = i;
+                lmin = -1;
+                lmax = -1;
+            }
+        }
+        return count;
+    }
+}
