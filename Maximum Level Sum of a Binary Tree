@@ -1,0 +1,31 @@
+//LeetCode 1161
+//Maximum Level Sum of a Binary Tree -- Medium
+//solved using queue(bfs)
+class Solution {
+    public int maxLevelSum(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        int level = 0;
+        int currlevel = 0;
+        int lsum = 0;
+        int mlsum = Integer.MIN_VALUE;
+        while(!q.isEmpty()){
+            int size = q.size();
+            lsum = 0;
+            for(int i=0;i<size;i++){
+                TreeNode curr = q.poll();
+                lsum += curr.val;
+                if(curr.left != null){
+                    q.add(curr.left);
+                }
+                if(curr.right != null){
+                    q.add(curr.right);
+                }
+            }
+            currlevel++;
+            level = mlsum >= lsum ? level : currlevel;
+            mlsum = Math.max(mlsum,lsum);
+        }
+        return level;
+    }
+}
