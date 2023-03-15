@@ -1,0 +1,20 @@
+//LeetCode 330
+// Patching Array -- Hard
+class Solution {
+    public int minPatches(int[] nums, int n) {
+        long mis_no = 1;
+        int count = 0;
+        int i = 0;
+        while(mis_no <= n){
+            if(i < nums.length && mis_no >= nums[i]){
+                mis_no += nums[i];
+                i++;
+            }
+            else{
+                count++;
+                mis_no += mis_no;
+            }
+        }
+        return count;
+    }
+}
