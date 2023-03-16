@@ -1,0 +1,48 @@
+//LeetCode 261
+//Graph Valid Tree -- Medium
+//solved using bfs or dfs
+public class Solution {
+    public boolean validTree(int n, int[][] edges) {
+        // write your code here
+        HashMap<Integer, HashMap<Integer, Integer>> mp = new HashMap<>();
+		    for(int i=0;i<n;i++) {
+			    mp.put(i, new HashMap<>());
+        }
+		    for (int i = 0; i < edges.length; i++) {
+          int a = edges[i][0];
+          int b = edges[i][1];
+          mp.get(a).put(b, 2);
+          mp.get(b).put(a, 2);
+		    }
+		   return ISvalid(mp);
+    }
+    public static boolean ISvalid(HashMap<Integer, HashMap<Integer, Integer>> mp){
+        Queue<Integer> q = new LinkedList<>();
+        HashSet<Integer> vis = new HashSet<>();
+        int count = 0;
+        for(int src : mp.keySet()){
+          if (vis.contains(src)){
+            continue;
+          }
+          count++;
+          q.add(src);
+          while(!q.isEmpty()){
+            // 1 remove
+            int rv = q.remove();
+            // 2 ignore if ALready visited
+            if(vis.contains(rv)){
+              return false;
+            }
+            // 3 marked visited
+            vis.add(rv);
+            // 5 unvisited nbrs ko add krna
+            for(int nbrs : map.get(rv).keySet()){
+              if(!vis.contains(nbrs)){
+                q.add(nbrs);
+              }
+            }
+			   }
+		   }
+	   	return count == 1;
+	}
+}
