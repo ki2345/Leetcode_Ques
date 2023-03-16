@@ -1,0 +1,45 @@
+//LeetCode 785
+//Is Graph Bipartite? -- Medium
+//solved using bfs
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        Queue<BipartitePair> q = new LinkedList<>();
+		HashMap<Integer, Integer> vis = new HashMap<>();
+		for(int src=0;src<graph.length;src++){
+			if(vis.containsKey(src)){
+				continue;
+			}
+			q.add(new BipartitePair(src, 0));
+			while(!q.isEmpty()){
+				// 1 remove
+				BipartitePair rv = q.remove();
+				// 2 ignore if ALready visited
+				if(vis.containsKey(rv.vertex)){
+					if(vis.get(rv.vertex) != rv.level){// odd length
+						return false;
+					} 
+                    else {
+						continue;
+					}
+				}
+				// 3 marked visited
+				vis.put(rv.vertex, rv.level);
+				// 5 unvisited nbrs ko add krna
+				for(int nbrs : graph[rv.vertex]){
+					if(!vis.containsKey(nbrs)){
+						q.add(new BipartitePair(nbrs, rv.level + 1));
+					}
+				}
+			}
+		}
+		return true;
+    }
+    class BipartitePair{
+        int vertex;
+        int level;
+        BipartitePair(int vertex, int level){
+            this.vertex = vertex;
+            this.level = level;
+        }
+    }
+}
