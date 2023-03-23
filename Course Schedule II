@@ -1,0 +1,49 @@
+//LeetCode 210
+//Course Schedule II -- Medium
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        for(int i=0;i<numCourses;i++){
+            map.put(i, new ArrayList<>());
+        }
+        for(int i=0;i<prerequisites.length;i++){
+            int v1 = prerequisites[i][0];
+            int v2 = prerequisites[i][1];
+            map.get(v2).add(v1);
+        }
+        return Topological_sort(map);
+    }
+    public int[] Topological_sort(HashMap<Integer, List<Integer>> map){
+        int idx = 0;
+        int[] in = Indegree(map);
+        int[] course = new int[map.size()];
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0;i<in.length;i++){
+            if(in[i] == 0){
+                q.add(i); //adding vertices in queue whose indegree is 0
+            }
+        }
+        int count = 0;
+        while(!q.isEmpty()){
+            int rv = q.remove();
+            course[idx++] = rv;
+            count++;
+            for(int nbrs: map.get(rv)){
+                in[nbrs]--;
+                if(in[nbrs] == 0){
+                    q.add(nbrs);
+                }
+            }
+        }
+        return count == map.size() ? course : new int[0];
+    }
+    public int[] Indegree(HashMap<Integer, List<Integer>> map){
+        int[] in = new int[map.size()];
+        for(int key : map.keySet()){
+            for(int nbrs: map.get(key)){
+                in[nbrs]++;
+            }
+        }
+        return in;
+    }
+}
