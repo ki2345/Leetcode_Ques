@@ -1,0 +1,40 @@
+//LeetCode 1319
+//Number of Operations to Make Network Connected -- Medium
+//using bfs traversal
+class Solution {
+    public int makeConnected(int n, int[][] connections) {
+        if(connections.length < n-1){
+            return -1;
+        }
+        List<List<Integer>> al = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            al.add(new ArrayList<>());
+        }
+        for(int i=0;i<connections.length;i++){
+            al.get(connections[i][0]).add(connections[i][1]);
+            al.get(connections[i][1]).add(connections[i][0]);
+        }
+        boolean[] vis = new boolean[n];
+        int count = 0;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                helper(i,vis,al);
+                count++;
+            }
+        }
+        return count - 1;
+    }
+    public void helper(int node, boolean[] vis, List<List<Integer>> al){
+         Queue<Integer> q = new LinkedList<>();
+         q.add(node);
+        while(!q.isEmpty()){
+         int curr = q.poll();
+            for(int adj : al.get(curr)){
+                if(!vis[adj]){
+                    q.add(adj);
+                    vis[adj] = true;
+                }
+            }
+        }
+    }
+}
