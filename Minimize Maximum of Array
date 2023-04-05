@@ -1,0 +1,14 @@
+//LeetCode 2439
+//Minimize Maximum of Array -- Medium
+class Solution {
+    public int minimizeArrayValue(int[] nums) {
+        double minMax = 0d;
+        double sum = 0d;
+        for(int i=0;i<nums.length;i++) {
+            sum += nums[i];
+            double avg = Math.ceil(sum / (i + 1));
+            minMax = Math.max(minMax, avg);
+        }
+        return (int)minMax;
+    }
+}
