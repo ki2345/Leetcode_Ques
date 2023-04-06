@@ -1,0 +1,60 @@
+//LeetCode 300
+//Longest Increasing Subsequence -- Medium
+//dp - O(n2)
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+         return lis(nums);
+     }
+    public static int lis(int[] ay){
+       int[] dp = new int[ay.length];
+       Arrays.fill(dp,1);
+        for(int i=0;i<dp.length;i++){
+             for(int j=i-1;j>=0;j--){
+                 if(ay[i] > ay[j]){
+                     dp[i] = Math.max(dp[i],dp[j] + 1);
+                 }
+             }
+         }
+         int max = dp[0];
+         for(int i=1;i<dp.length;i++){
+             max = Math.max(dp[i], max);
+         }
+         return max;
+     }
+ }
+// O(n (log n))
+class Solution{
+    public int lengthOfLIS(int[] nums){
+        return lis(nums);
+    }
+    public static int lis(int[] ay){
+        int[] dp = new int[ay.length];
+        dp[0] = ay[0];
+        int len = 1;
+        for(int i=1;i<ay.length;i++){
+            if(ay[i] > dp[len-1]){
+                dp[len] = ay[i];
+                len++;
+            }
+            else{
+                int ith = Search(dp,0,len-1,ay[i]);
+                dp[ith] = ay[i];
+            }
+        }
+        return len;
+    }
+    public static int Search(int[] dp, int si,int ei, int item){
+        int ans = 0;
+        while(si <= ei){
+            int mid = (si + ei) / 2;
+            if(dp[mid] >= item){
+                ans = mid;
+                ei = mid - 1;
+            }
+            else{
+                si = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
