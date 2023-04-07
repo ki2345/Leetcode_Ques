@@ -1,0 +1,31 @@
+//LeetCode 1254
+//Number of Closed Islands -- Medium
+//Using DFS
+class Solution {
+   public int closedIsland(int[][] grid) {
+        int count = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        boolean vis[][] = new boolean[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j] == 0){
+                    count += dfs(i,j,grid,vis,m,n);
+                }
+            }
+        }
+        return count;
+    }
+    public static int dfs(int i,int j,int grid[][],boolean vis[][],int m,int n){
+        if(i >= m || j >= n || i < 0 || j < 0) 
+            return 0;
+        if(grid[i][j] == 1) 
+            return 1;
+        grid[i][j] = 1;
+        int up = dfs(i-1,j,grid,vis,m,n);
+        int down = dfs(i+1,j,grid,vis,m,n);
+        int left = dfs(i,j-1,grid,vis,m,n);
+        int right = dfs(i,j+1,grid,vis,m,n);
+        return up & down & left & right;
+    }
+}
