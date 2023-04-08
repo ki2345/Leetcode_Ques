@@ -1,0 +1,16 @@
+//LeetCode 133
+//Clone Graph -- Medium
+class Solution {
+  Node[] clone = new Node[100];
+    public Node cloneGraph(Node node) {
+        if(node == null) 
+            return null; 
+        int i = node.val - 1; 
+        if(clone[i] == null) {
+            clone[i] = new Node(node.val); 
+            for(Node nbrs : node.neighbors) 
+                clone[i].neighbors.add(cloneGraph(nbrs));
+        }
+        return clone[i]; 
+    }
+}
