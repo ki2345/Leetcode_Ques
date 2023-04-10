@@ -1,0 +1,35 @@
+//LeetCode 20
+//Valid Parentheses -- Easy
+//Using stack
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+    char[] arr = s.toCharArray();
+    for(char ch : arr){
+        if(ch=='('||ch=='{'||ch=='['){
+            st.push(ch);
+        }else{
+            if(st.isEmpty()){
+                return false;
+            }
+            char cha = st.peek();
+            if(ch == ')' && cha == '('){
+                st.pop();
+                continue;
+            }else if (ch == '}' && cha == '{'){
+                st.pop();
+                continue;
+            }else if(cha == '['){
+                st.pop();
+                continue;
+            }
+            st.push(ch);
+        }
+    }
+    
+    if(!st.isEmpty()){
+        return false;
+    }
+    return true;
+    }
+}
