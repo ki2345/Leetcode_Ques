@@ -1,0 +1,14 @@
+//LeetCode 1491
+//Average Salary Excluding the Minimum and Maximum Salary -- Easy
+class Solution {
+    public double average(int[] salary) {
+        Arrays.sort(salary);
+        int sum = 0;
+        double avg;
+        for(int i=1;i<=salary.length-2;i++){
+            sum += salary[i];
+        }
+        avg = (double)sum / (salary.length-2);
+        return avg;
+    }
+}
