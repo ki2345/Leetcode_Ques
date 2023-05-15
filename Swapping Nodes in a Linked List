@@ -1,0 +1,25 @@
+//LeetCode 1721
+//Swapping Nodes in a Linked List -- Medium
+//created two pointers , one from head and another from tail , based on value of k , swap the nodes
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode node = head;
+        int count = 0;
+        while(node.next != null){
+            count++;
+            node = node.next;
+        }
+        node = head;
+        ListNode temp = head;
+        for(int i=0;i<k-1;i++){
+            node = node.next;
+        }
+        for(int i=0;i<=count-k;i++){
+            temp = temp.next;
+        }
+        int newnode = temp.val;
+        temp.val = node.val;
+        node.val = newnode;
+        return head;
+    }
+}
