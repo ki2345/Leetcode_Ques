@@ -1,0 +1,15 @@
+//LeetCode 24
+//Swap Nodes in Pairs -- Medium
+ public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null)
+            return head;
+        ListNode curr = head;
+        ListNode p1 = head.next;
+        ListNode temp = p1.next;
+        curr.next = temp;
+        p1.next = curr;
+        if(temp != null){
+            curr.next = swapPairs(temp);
+        }
+        return p1;
+ }
