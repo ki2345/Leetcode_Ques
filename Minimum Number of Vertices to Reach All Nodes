@@ -1,0 +1,15 @@
+//LeetCode 1557
+//Minimum Number of Vertices to Reach All Nodes -- Medium
+class Solution {
+    public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
+        List<Integer> res = new ArrayList<>();
+        int[] vis = new int[n];
+        for(List<Integer> e : edges)
+            vis[e.get(1)] = 2;
+        for(int i=0;i<n;i++){
+            if(vis[i] == 0) 
+                res.add(i);
+        }
+        return res;    
+    }
+}
