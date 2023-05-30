@@ -1,0 +1,30 @@
+//LeetCode 705
+//Design HashSet -- Easy
+class MyHashSet {
+    List<Integer> al;
+    public MyHashSet() {
+        al = new ArrayList<>();
+    }
+    
+    public void add(int key) {
+        if(!al.contains(key)){
+            al.add(key);
+        }
+    }
+    
+    public void remove(int key) {
+        for(int i=0;i<al.size();i++){
+            if(al.get(i) == key){
+                al.remove(i);
+            }
+        }
+    }
+    
+    public boolean contains(int key) {
+        for(int i=0;i<al.size();i++){
+            if(al.get(i) == key)
+                return true;
+        }
+        return false;
+    }
+}
