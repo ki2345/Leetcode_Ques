@@ -1,0 +1,28 @@
+//LeetCode 337
+//House Robber III -- Medium
+//solved using HashMap and Recursion
+class Solution {
+    public int rob(TreeNode root) {
+        HashMap<TreeNode, Integer> map = new HashMap<>();
+        return house_rob(root, map);
+    }
+    public static int house_rob(TreeNode root, HashMap<TreeNode, Integer> map){
+        if(root == null){
+            return 0;
+        }
+        if(map.containsKey(root)){
+            return map.get(root);
+        }
+        int ans = root.val;
+        if(root.left != null){
+            ans += house_rob(root.left.left, map) + house_rob(root.left.right, map);
+        }
+        if(root.right != null){
+            ans += house_rob(root.right.left, map) + house_rob(root.right.right, map);
+        }
+        int dontrob = house_rob(root.left, map) + house_rob(root.right, map);
+        int res = Math.max(ans, dontrob);
+        map.put(root, res);
+        return res;
+    }
+}
