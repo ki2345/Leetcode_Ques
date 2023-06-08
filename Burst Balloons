@@ -3,31 +3,60 @@
 //solved using DP( Top-down approach )
 class Solution {
     public int maxCoins(int[] nums) {
-        int[] dp = new int[nums.length + 2];
-        dp[0] = dp[dp.length - 1] = 1;
-        for(int i=1;i<dp.length-1;i++){
-            dp[i] = nums[i - 1];
+        int[] arr = new int[nums.length + 2];
+        arr[0] = arr[arr.length - 1] = 1;
+        for(int i=1;i<arr.length-1;i++){
+            arr[i] = nums[i - 1];
         }
-        int[][] dp1 = new int[dp.length][dp.length];
-        for(int[] a : dp1){
+        int[][] dp = new int[arr.length][arr.length];
+        for(int[] a : dp){
             Arrays.fill(a, -1);
         }
-        return Burst(dp, 0, dp.length-1, dp1);
+        return Burst(arr, 0, arr.length-1, dp);
     }
-    public static int Burst(int[] dp, int si, int ei, int[][] dp1){
+    public static int Burst(int[] arr, int si, int ei, int[][] dp){
         if(si + 1 == ei){
             return 0;
         }
-        if(dp1[si][ei] != -1){
-            return dp1[si][ei];
+        if(dp[si][ei] != -1){
+            return dp[si][ei];
         }
         int ans = Integer.MIN_VALUE;
         for(int k=si+1;k<ei;k++){
-            int left = Burst(dp, si, k, dp1);
-            int right = Burst(dp, k, ei, dp1);
-            int self = dp[si] * dp[k] * dp[ei];
+            int left = Burst(arr, si, k, dp);
+            int right = Burst(arr, k, ei, dp);
+            int self = arr[si] * arr[k] * arr[ei];
             ans = Math.max(ans, self + left + right);
         }
-        return dp1[si][ei] = ans;
+        return dp[si][ei] = ans;
+    }
+}
+
+//solved using DP( bottom-up approach )
+class Solution {
+    public int maxCoins(int[] nums) {
+        int[] arr = new int[nums.length + 2];
+        arr[0] = arr[arr.length - 1] = 1;
+        for(int i=1;i<arr.length-1;i++){
+            arr[i] = nums[i - 1];
+        }
+        return Burst(arr);
+    }
+    public static int Burst(int[] arr){
+        int[][] dp = new int[arr.length][arr.length];
+        for(int slide=2;slide<dp.length;slide++){
+            for(int j=slide;j<dp.length;j++){
+                int i = j - slide;
+                int ans = Integer.MIN_VALUE;
+                for(int k=i+1;k<j;k++){
+                    int left = dp[i][k];
+                    int right = dp[k][j];
+                    int self = arr[i] * arr[k] * arr[j];
+                    ans = Math.max(ans, self + left + right);
+                }
+                dp[i][j] = ans;
+            }
+        }
+        return dp[0][dp.length-1];
     }
 }
