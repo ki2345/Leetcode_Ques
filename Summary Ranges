@@ -1,0 +1,18 @@
+//LeetCode 228
+//Summary Ranges -- Easy
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> res = new ArrayList<>();
+        for(int i=0;i<nums.length;++i){
+            final int start = nums[i]; 
+            while(i + 1 < nums.length && nums[i] == nums[i + 1] - 1)
+                ++i;
+            final int end = nums[i];
+            if(start == end)
+                res.add("" + start);
+            else
+                res.add("" + start + "->" + end);
+        }
+        return res;
+    }
+}
