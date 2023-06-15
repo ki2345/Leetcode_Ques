@@ -1,0 +1,22 @@
+//CodeForces 
+import java.util.Scanner;
+
+public class Tavva_Saddas {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        System.out.println(Find_index(s));
+    }
+    public static int Find_index(String s){
+        int n = s.length();
+        int idx = (1 << n) - 2;
+        int pos = 0;
+        for(int i=s.length();i>=0;i--){
+            if(s.charAt(i) == '7'){
+                idx = idx + (1 << pos);
+            }
+            pos++;
+        }
+        return idx + 1;
+    }
+}
