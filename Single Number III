@@ -1,0 +1,21 @@
+//LeetCode 260
+//Single Number III -- Medium
+//solved using bitmasking
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        int ans = 0;
+        for(int i=0;i<nums.length;i++){
+            ans = ans ^ nums[i];
+        }
+        int mask = ans & (~(ans - 1));
+        int a = 0;
+        for(int i=0;i<nums.length;i++){
+            if((mask & nums[i]) != 0){
+                 a ^= nums[i];
+            }
+        }
+        int b = ans ^ a;
+        int[] res = {a,b};
+        return res;
+    }
+}
