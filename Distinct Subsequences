@@ -1,0 +1,32 @@
+//LeetCode 115
+//Distinct Subsequences -- Hard
+//solved using dp
+class Solution {
+    public int numDistinct(String s, String t) {
+        int[][] dp = new int[t.length()+1][s.length()+1];
+        for(int[] a : dp){
+            Arrays.fill(a, -1);
+        }
+        return helper(s, t, 0, 0, dp);
+    }
+    //coins -- s -- i index
+    //amount -- t -- j index
+    public static int helper(String s, String t, int i, int j, int[][] dp){
+        if(j == t.length()){
+            return 1;
+        }
+        if(i == s.length()){
+            return 0;
+        }
+        if(dp[j][i] != -1){
+            return dp[j][i];
+        }
+        int inc = 0;
+        int exc = 0;
+        if(s.charAt(i) == t.charAt(j)){
+            inc = helper(s, t, i+1, j+1, dp);
+        }
+        exc = helper(s, t, i+1, j, dp);
+        return dp[j][i] = inc + exc;
+    }
+}
