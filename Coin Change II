@@ -1,0 +1,57 @@
+//LeetCode 518
+//Coin Change II -- Medium
+//Solved using DP
+import java.util.Arrays;
+
+public class Coin_Change_2 {
+    public static void main(String[] args) {
+        int [] coins = { 1, 2, 5};
+        int amount = 5;
+        int[][] dp = new int[amount+1][coins.length+1];
+        for(int [] a : dp){
+            Arrays.fill(a, -1);
+        }
+        System.out.println(CoinChanges(coins, amount, 0, dp));
+        System.out.println(CoinChangesBU(coins, amount));
+    }
+    //top-down
+    public static int CoinChanges(int[] coins, int amount, int i, int[][] dp){
+        if(amount == 0){
+            return 1;
+        }
+        if(i == coins.length){
+            return 0;
+        }
+        if(dp[amount][i] != -1){
+            return dp[amount][i];
+        }
+        int inc = 0;//including the coin
+        int exc = 0;//excluding the coin
+        if(amount >= coins[i]){
+            inc += CoinChanges(coins, amount-coins[i], i, dp);
+        }
+        exc += CoinChanges(coins, amount, i+1, dp);
+        return dp[amount][i] = inc + exc;
+    }
+    //bottom-up
+    public static int CoinChangesBU(int[] coins, int amount){
+        int[][] dp = new int[amount+1][coins.length+1];
+        for(int i=0;i<dp[0].length;i++){
+            dp[0][i] = 1;
+        }
+        //amount
+        for(int i=1;i<dp.length;i++){
+            //index
+            for(int j=1;j<dp[0].length;j++){
+                int inc = 0;
+                int exc = 0;
+                if(i >= coins[j-1]){
+                    inc = dp[i - coins[j-1]][j];
+                }
+                exc = dp[i][j-1];
+                dp[i][j] = inc + exc;
+            }
+        }
+        return dp[amount][coins.length];
+    }
+}
