@@ -1,0 +1,32 @@
+//LeetCode 1289
+// Minimum Falling Path Sum II -- Hard
+//solved using dp
+class Solution {
+    public int minFallingPathSum(int[][] grid) {
+          int ans = Integer.MAX_VALUE;
+          int[][] dp = new int[grid.length][grid[0].length];
+          for(int[] a : dp){
+              Arrays.fill(a, -1);
+          }
+          for(int i=0;i<grid[0].length;i++){
+              ans = Math.min(ans, Falling_pathsum(grid,0,i,dp));
+          }
+          return ans;
+    }
+    public static int Falling_pathsum(int[][] arr, int i, int j, int[][] dp){
+         if(i == arr.length - 1){
+             return arr[i][j];
+         }
+         if(dp[i][j] != -1){
+             return dp[i][j];
+         }
+         int ans = Integer.MAX_VALUE;
+         for(int col=0;col<arr[0].length;col++){
+             //checking that if prev col and curr col are same or not
+             if(col != j){
+                 ans = Math.min(ans, Falling_pathsum(arr,i+1,col, dp));
+             }
+         }
+        return dp[i][j] = ans + arr[i][j];
+     }
+}
