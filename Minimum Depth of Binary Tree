@@ -1,0 +1,31 @@
+//LeetCode 111
+//Minimum Depth of Binary Tree -- Easy
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        
+        int miniDepthTree = 0;
+        while(!q.isEmpty()) {
+            miniDepthTree++;
+            int n = q.size();
+            for(int i = 0;  i < n; i++) {
+                TreeNode currNode = q.poll();
+                
+                if(currNode.left == null && currNode.right == null) {
+                    return  miniDepthTree;
+                }
+                
+                if(currNode.left  != null) 
+                    q.add(currNode.left);
+                if(currNode.right != null) 
+                    q.add(currNode.right);
+            }
+            
+        }
+        return miniDepthTree;
+    }
+}
