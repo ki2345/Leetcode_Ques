@@ -1,0 +1,25 @@
+//LeetCode 652
+//Find Duplicate Subtrees -- Medium
+class Solution {
+    HashMap<String, TreeNode> mp = new HashMap<>();
+    HashSet<TreeNode> st = new HashSet<>();
+    public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
+        helper(root);
+        return new ArrayList<>(st);
+    }
+    public String helper(TreeNode root){
+        if(root == null){
+            return "X";
+        }
+        String left = helper(root.left);
+        String right = helper(root.right);
+        String res = root.val + " " + left + " " + right;
+        if(mp.containsKey(res)){
+            st.add(mp.get(res));
+        }
+        else{
+            mp.put(res, root);
+        }
+        return res;
+    }
+}
