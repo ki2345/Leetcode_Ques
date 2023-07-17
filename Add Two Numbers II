@@ -1,0 +1,40 @@
+//LeetCode 445
+//Add Two Numbers II -- Medium
+//solved using Stack
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> st1 = new Stack<>();
+        Stack<Integer> st2 = new Stack<>();
+        while(l1 != null){
+            st1.add(l1.val);
+            l1 = l1.next;
+        }
+        while(l2 != null){
+            st2.add(l2.val);
+            l2 = l2.next;
+        }
+        int sum = 0;
+        int carry = 0;
+        ListNode res = null;
+        ListNode newnode;
+        while(!st1.isEmpty() || !st2.isEmpty()){
+            if(!st1.isEmpty())
+                sum += st1.pop();
+            if(!st2.isEmpty())
+                sum += st2.pop();
+            sum += carry;
+            carry = sum/10;
+            newnode = new ListNode(sum % 10);
+            newnode.next = res;
+            res = newnode;
+            sum = 0; 
+        }
+        //corner case if both numbers are of 3 digits, and sum is of 4 digits
+        if(carry != 0){
+            newnode = new ListNode(carry);
+            newnode.next = res;
+            res = newnode;
+        }
+        return res;
+    }
+}
