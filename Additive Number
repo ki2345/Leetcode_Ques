@@ -1,0 +1,46 @@
+//LeetCode 306
+//Additive Number -- Medium
+//solved using BigInteger class
+import java.math.BigInteger;
+class Solution {
+    public boolean isAdditiveNumber(String num) {
+        List<BigInteger> al = new LinkedList<>();
+        return isAdditive(num, al);
+    }
+    //ek number ko cut karke kitne number tak break kar sakte ho
+    public static boolean isAdditive(String str, List<BigInteger> al){
+        if(str.length() == 0){
+           if(al.size() >= 3){
+               return true;
+           }
+           return false;
+        }
+        for(int i=1;i<=str.length();i++){
+            String s1 = str.substring(0, i);
+            if(nonleading(s1) && validAdditive(al, s1)){
+                al.add(new BigInteger(s1));
+                boolean res = isAdditive(str.substring(i), al);
+                if(res){
+                    return res;
+                }
+                al.remove(al.size() - 1);
+            }
+        }
+        return false;
+    }
+    public static boolean nonleading(String s1){
+        if(s1.length() == 1){
+            return true;
+        }
+        return s1.charAt(0) != '0';
+    }
+    public static boolean validAdditive(List<BigInteger> al, String str){
+        if(al.size() <= 1){
+            return true;
+        }
+        BigInteger first = al.get(al.size() - 1);
+        BigInteger second = al.get(al.size() - 2);
+        BigInteger ans = new BigInteger(str);
+        return first.add(second).equals(ans);
+    }
+}
