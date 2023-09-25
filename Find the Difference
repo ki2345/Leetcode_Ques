@@ -1,0 +1,14 @@
+//LeetCode 389
+//Find the Difference -- Easy
+class Solution {
+    public char findTheDifference(String s, String t) {
+       int diff = 0;
+       for(int ch1: t.toCharArray()){
+           diff += ch1;
+       }
+       for(int ch2: s.toCharArray()){
+           diff -= ch2;
+       }
+       return (char)(diff);
+    }
+}
