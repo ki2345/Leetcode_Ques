@@ -1,0 +1,28 @@
+//LeetCode 2038
+//Remove Colored Pieces if Both Neighbours are the Same Color -- Medium
+class Solution {
+    public boolean winnerOfGame(String colors) {
+        int countA = 0; //count for how many times removing 'A'
+        int countB = 0; //count for how many times removing 'B'
+        int tempA = 0;
+        int tempB = 0;
+        for(int i=0;i<colors.length();i++){
+            char ch = colors.charAt(i);
+            if(ch == 'A'){
+                tempB = 0;
+                tempA += 1;
+                if(tempA >= 3){
+                    countA += 1;
+                }
+            }
+            else{
+                tempA = 0;
+                tempB += 1;
+                if(tempB >= 3){
+                    countB += 1;
+                }
+            }
+        }
+        return countA > countB;
+    }
+}
