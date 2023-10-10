@@ -1,0 +1,31 @@
+//LeetCode 2009
+//Minimum Number of Operations to make Array Continuous -- Hard
+class Solution {
+    public int minOperations(int[] nums) {
+       int n = nums.length;
+       int minop = n; //minop -- minimum operations
+       //removing duplicate elements
+       HashSet<Integer> set = new HashSet<>();
+       for(int ele : nums){
+           set.add(ele);
+       }
+       int[] unique = new int[set.size()];
+       int i = 0;
+       for(int x : set){
+           unique[i] = x;
+           i++;
+       }
+       Arrays.sort(unique);
+       //finding minop to make array continuous
+       int j = 0;
+       int m = unique.length;
+       for(i=0;i<m;i++){
+           //unique[j] is in range or not
+           while(j < m && unique[j] < unique[i] + n){
+               j++;
+           }
+           minop = Math.min(minop, n-j+i);
+       }
+       return minop;
+    }
+}
