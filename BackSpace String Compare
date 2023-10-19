@@ -1,0 +1,26 @@
+//LeetCode 844
+//BackSpace String Compare -- Easy
+//solved using stack
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        Stack<Character> stS = new Stack<>();
+        Stack<Character> stT = new Stack<>();
+        for(char c1 : s.toCharArray()){
+            if(c1 != '#'){
+                stS.push(c1);
+            }
+            else if( c1 == '#' && !stS.isEmpty()){
+                stS.pop();
+            }
+        }
+        for(char c2 : t.toCharArray()){
+            if(c2 != '#'){
+                stT.push(c2);
+            }
+            else if(c2 == '#' && !stT.isEmpty()){
+                stT.pop();
+            }
+        }
+        return stS.equals(stT);
+    }
+}
