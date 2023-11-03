@@ -1,0 +1,18 @@
+//LeetCode 1441 -- Medium
+//Build an Array With Stack Operations 
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> res = new ArrayList<>();
+        int currnum = 1; // to push number in the stack
+        for(int i=0;i<target.length;i++){
+            while(currnum < target[i]){
+                res.add("Push");
+                res.add("Pop");
+                currnum++;
+            }
+            res.add("Push");
+            currnum++;
+        }
+        return res;
+    }
+}
