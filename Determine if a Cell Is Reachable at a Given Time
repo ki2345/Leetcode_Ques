@@ -1,0 +1,24 @@
+//LeetCode 2849 -- Medium
+//Determine if a Cell Is Reachable at a Given Time
+class Solution {
+    public boolean isReachableAtTime(int sx, int sy, int fx, int fy, int t) {
+        if(sx == fx && sy == fy){
+            if(t == 1){
+                return false;
+            }
+        }
+        int xdiff = sx - fx;
+        int ydiff = sy - fy;
+        if(xdiff < 0){
+            xdiff = -xdiff;
+        }
+        if(ydiff < 0){
+            ydiff = -ydiff;
+        }
+        int maxdiff = Math.max(xdiff, ydiff);
+        if(maxdiff <= t){
+            return true;
+        }
+        return false;
+    }
+}
