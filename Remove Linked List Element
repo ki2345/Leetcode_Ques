@@ -1,0 +1,23 @@
+//LeetCode 203
+//Remove Linked List Elements -- Easy
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode currnode = new ListNode(0);
+        ListNode nextnode = null;
+        currnode.next = head;
+        ListNode temp = head;
+        ListNode prev = currnode;
+        while(temp!=null)
+        {
+            nextnode = temp.next;
+            if(temp.val==val)
+            {
+                prev.next = nextnode;
+            }
+            else
+                prev = temp;
+            temp = nextnode;
+        }
+        return currnode.next;
+    }
+}
