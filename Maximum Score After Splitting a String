@@ -1,0 +1,24 @@
+//LeetCode 1422
+//Maximum Score After Splitting a String -- Easy
+class Solution {
+    public int maxScore(String s) {
+        int res = 0;
+        for(int i=0;i<s.length()-1;i++){
+            int currscore = 0;
+            //left
+            for(int j=0;j<=i;j++){
+                if(s.charAt(j) == '0'){
+                    currscore++;
+                }
+            }
+            //right
+            for(int j=i+1;j<s.length();j++){
+                if(s.charAt(j) == '1'){
+                    currscore++;
+                }
+            }
+            res = Math.max(res, currscore);
+        }
+        return res;
+    }
+}
