@@ -1,0 +1,30 @@
+//LeetCode 1496
+//Path Crossing -- Easy
+class Solution {
+    public boolean isPathCrossing(String path) {
+        int x = 0;
+        int y = 0;
+        Set<String> vis = new HashSet<>();
+        vis.add(x + "," + y);
+        for(char direction : path.toCharArray()){
+            if(direction == 'N'){
+                y++;
+            }
+            else if(direction == 'S'){
+                y--;
+            }
+            else if(direction == 'E'){
+                x++;
+            }
+            else{
+                x--;
+            }
+            String pt = x + "," + y;
+            if(vis.contains(pt)){
+                return true;
+            }
+            vis.add(pt);
+        }
+        return false;
+    }
+}
