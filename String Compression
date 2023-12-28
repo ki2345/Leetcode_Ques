@@ -3,23 +3,28 @@
 class Solution {
     public int compress(char[] chars) {
         int i = 0;
-        int count = 0;
-        while(i < chars.length)
-        {
-            int j = i;
-            while(j < chars.length && chars[i] == chars[j])
-            {
-              j++;  
+        int idx = 0;
+        int n = chars.length;
+        while(i < n){
+            char currchar = chars[i];
+            int count = 0;
+            //find count of duplicates
+            while(i < n && chars[i] == currchar){
+                count++;
+                i++;
             }
-            chars[count] = chars[i];
-            count++;
-            if(j-i > 1){
-                String res = j-i + ""; 
-                for(char ch : res.toCharArray())
-                    chars[count++] = ch;
+            //assign 
+            chars[idx] = currchar;
+            idx++;
+            //for count, it can be of two digit 
+            if(count > 1){
+                String cntst = String.valueOf(count);
+                for(char ch : cntst.toCharArray()){
+                    chars[idx] = ch;
+                    idx++;
+                }
             }
-            i = j;   
         }
-        return count;
+        return idx;
     }
 }
