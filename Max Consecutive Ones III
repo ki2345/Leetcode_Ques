@@ -1,0 +1,21 @@
+//LeetCode 1004
+//Max Consecutive Ones III -- Medium
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int zerocnt = 0;
+        int i = 0;
+        int res = 0;
+        for(int j=0;j<nums.length;j++){
+            if(nums[j] == 0)
+                zerocnt++;
+            while(zerocnt > k){
+                if(nums[i] == 0){
+                    zerocnt--;
+                }
+                i++;
+            }
+            res = Math.max(res, j-i+1);
+        }
+        return res;
+    }
+}
