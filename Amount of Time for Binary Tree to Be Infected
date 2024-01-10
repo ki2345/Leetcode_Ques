@@ -1,0 +1,51 @@
+//LeetCode 2385
+//Amount of Time for Binary Tree to Be  Infected -- Medium
+//convert binary tree to undirected graph and then do BFS (level by level)
+class Solution{
+    public int amountOfTime(TreeNode root, int start){
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        convertToGraph(root, 0, map);
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+        int minute = 0;
+        Set<Integer> vis = new HashSet<>();
+        vis.add(start);
+        while(!q.isEmpty()){
+            int levelSize = q.size();
+            while(levelSize > 0){
+                int curr = q.poll();
+                for(int num : map.get(curr)){
+                    if(!vis.contains(num)){
+                        vis.add(num);
+                        q.add(num);
+                    }
+                }
+                levelSize--;
+            }
+            minute++;
+        }
+        return minute - 1;
+    }
+
+    void convertToGraph(TreeNode curr, int parent, Map<Integer, Set<Integer>> map){
+        if(curr == null){
+            return;
+        } 
+        if(!map.containsKey(curr.val)){
+            map.put(curr.val, new HashSet<>());
+        }
+        Set<Integer> adj = map.get(curr.val);
+        if(parent != 0){
+            adj.add(parent);
+        } 
+        if(curr.left != null){
+            adj.add(curr.left.val);
+        } 
+        if(curr.right != null){
+            adj.add(curr.right.val);
+        }
+        convertToGraph(curr.left, curr.val, map);
+        convertToGraph(curr.right, curr.val, map);
+    }
+}
+
