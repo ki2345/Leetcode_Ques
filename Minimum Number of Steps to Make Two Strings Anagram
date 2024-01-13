@@ -1,0 +1,17 @@
+//LeetCode 1347
+//Minimum Number of Steps to Make Two Strings Anagram -- Medium
+class Solution {
+    public int minSteps(String s, String t) {
+        int n = s.length();
+        int[] freqdiff = new int[26];
+        for(int i=0;i<n;i++){
+            freqdiff[s.charAt(i) - 'a']++;
+            freqdiff[t.charAt(i) - 'a']--;
+        }
+        int cnt = 0;
+        for(int i=0;i<26;i++){
+            cnt += Math.max(0, freqdiff[i]);
+        }
+        return cnt;
+    }
+}
