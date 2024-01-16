@@ -1,0 +1,39 @@
+//LeetCode 380
+//Insert Delete GetRandom O(1) -- Medium
+class RandomizedSet {
+    private ArrayList<Integer> al;
+    private Map<Integer, Integer> mp; //for removal ke liye as using map , we can store the index and the element , and when removing can easily get it in O(1)
+    private Random num;
+    public RandomizedSet() {
+        al = new ArrayList<>();
+        mp = new HashMap<>();
+        num = new Random();
+    }
+    
+    public boolean insert(int val) {
+        if(mp.containsKey(val)){
+            return false;
+        }
+        al.add(val);
+        mp.put(val, al.size()-1);
+        return true;
+    }
+    
+    public boolean remove(int val) {
+        if(!mp.containsKey(val)){
+            return false;
+        }
+        int idx = mp.get(val);
+        int lastele = al.get(al.size() - 1);
+        al.set(idx, lastele);
+        mp.put(lastele, idx);
+        al.remove(al.size() - 1);
+        mp.remove(val);
+        return true;
+    }
+    
+    public int getRandom() {
+        int idx = num.nextInt(al.size());
+        return al.get(idx);
+    }
+}
