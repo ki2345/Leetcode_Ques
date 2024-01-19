@@ -1,0 +1,32 @@
+//LeetCode 931
+//Minimum Falling Path Sum -- Medium
+class Solution{
+      public int minFallingPathSum(int[][] A) {
+        int[][] dp = new int[A.length][A[0].length];
+        for(int[] a : dp){
+            Arrays.fill(a, Integer.MIN_VALUE);
+        }
+        int ans = Integer.MAX_VALUE;
+        for(int i=0;i<A[0].length;i++){
+            ans = Math.min(ans, Falling_pathsum(A, 0, i, dp));
+        }
+        return ans;
+    }
+     public static int Falling_pathsum(int[][] arr, int row, int col, int[][] dp){
+         if(col < 0 || col >= arr[0].length){
+             return Integer.MAX_VALUE;
+         }
+         if(row == arr.length - 1){
+             return arr[row][col];
+         }
+         if(dp[row][col] != Integer.MIN_VALUE){
+             return dp[row][col];
+         }
+         int ans = 0;
+         int leftd = Falling_pathsum(arr, row+1, col-1, dp);
+         int down = Falling_pathsum(arr, row+1, col, dp);
+         int rightd = Falling_pathsum(arr, row+1, col+1, dp);
+         ans = arr[row][col] + Math.min(leftd, Math.min(down ,rightd));
+         return dp[row][col] = ans;
+     }
+ }
