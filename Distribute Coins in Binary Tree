@@ -1,0 +1,18 @@
+//LeetCode 979
+//Distribute Coins in Binary Tree -- Medium
+class Solution {
+    int no_of_moves = 0;
+    public int distributeCoins(TreeNode root) {
+        solve(root);
+        return no_of_moves;
+    }
+    public int solve(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = solve(root.left);
+        int right = solve(root.right);
+        no_of_moves += Math.abs(left) + Math.abs(right);
+        return root.val + left + right - 1;
+    }
+}
