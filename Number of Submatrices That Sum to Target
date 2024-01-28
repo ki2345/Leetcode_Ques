@@ -1,0 +1,37 @@
+//LeetCode 1074
+//Number of Submatrices That Sum to Target -- Hard
+public class Solution{
+    public int numSubmatrixSumTarget(int[][] matrix, int target){
+        int r = matrix.length; // m
+        int c = matrix[0].length; // n
+
+        // First take the cumulative sum row-wise
+        for(int row=0;row<r;row++){
+            for(int col=1;col<c;col++){
+                matrix[row][col] += matrix[row][col - 1];
+            }
+        }
+
+        // Now, find the "No. of subarrays with sum k" in the downward direction
+        int count = 0;
+        for(int startCol=0;startCol<c;startCol++){
+            for(int currCol=startCol; currCol<c;currCol++){
+                // We need to find all submatrices sum
+
+                // Now comes the concept of "No. of subarrays with sum k"
+                Map<Integer, Integer> mp = new HashMap<>();
+                mp.put(0, 1);
+                int sum = 0;
+                // Go downwards row-wise
+                for(int row=0;row<r;row++){
+                    sum += matrix[row][currCol] - (startCol > 0 ? matrix[row][startCol - 1] : 0);
+                    if (mp.containsKey(sum - target)){
+                        count += mp.get(sum - target);
+                    }
+                    mp.put(sum, mp.getOrDefault(sum, 0) + 1);
+                }
+            }
+        }
+        return count;
+    }
+}
