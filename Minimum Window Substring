@@ -1,0 +1,43 @@
+//LeetCode 76
+//Minimum Window Substring -- Hard
+class Solution{
+    public String minWindow(String s, String t){
+        int n = s.length();
+        if(t.length() > n){
+            return "";
+        }
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(char ch : t.toCharArray()){
+            map.put(ch,map.getOrDefault(ch,0) + 1);
+        }
+        int requiredCount = t.length();
+        int i = 0;
+        int j = 0;
+        int minWindow = Integer.MAX_VALUE;
+        int start_i = 0;
+        // exploring window ke liye j use kiya hai
+        while(j < n){
+            char ch = s.charAt(j);
+            if(map.getOrDefault(ch,0) > 0){
+                requiredCount--;
+            }
+            map.put(ch,map.getOrDefault(ch,0) - 1);
+            while(requiredCount == 0){
+                // shrinking window keliye i variable use kiya hai
+                int currWindow = j - i + 1;
+                if(minWindow > currWindow){
+                    minWindow = currWindow;
+                    start_i = i;
+                }
+                char c = s.charAt(i);
+                map.put(c,map.getOrDefault(c,0) + 1);
+                if(map.getOrDefault(c,0) > 0){
+                    requiredCount++;
+                }
+                i++;
+            }
+            j++;
+        }
+        return minWindow == Integer.MAX_VALUE ? "" : s.substring(start_i, start_i + minWindow);
+    }
+}
