@@ -1,0 +1,36 @@
+//LeetCode 368
+//Largest Divisible Subset -- Medium
+class Solution {
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        int n = nums.length;
+        Arrays.sort(nums);
+        //for storing the count of subsets 
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        //for storing the previous index to which the condition satisfies
+        int[] prev_idx = new int[n];
+        Arrays.fill(prev_idx, -1);
+        int lastchosen_idx = 0;
+        int maxlen = 1;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i] % nums[j] == 0){
+                    if(dp[i] < dp[j] + 1){
+                        dp[i] = dp[j] + 1;
+                        prev_idx[i] = j;
+                    }
+                    if(dp[i] > maxlen){
+                        maxlen = dp[i];
+                        lastchosen_idx = i;
+                    }
+                }
+            }
+        }
+        while(lastchosen_idx != -1){
+            res.add(nums[lastchosen_idx]);
+            lastchosen_idx = prev_idx[lastchosen_idx];
+        }
+        return res;
+    }
+}
