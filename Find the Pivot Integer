@@ -1,0 +1,30 @@
+//LeetCode 2485
+//Find the Pivot Integer -- Easy
+class Solution {
+    public int pivotInteger(int n) {
+        int sum1 = 1;
+        int sum2 = n;
+        int stnum = 1;
+        int endnum = n;
+        while(stnum <= endnum){
+            if(sum1 == sum2 && stnum == endnum){
+                return stnum;
+            }
+            else if(sum1 < sum2){
+                stnum++;
+                sum1 += stnum;
+            }
+            else if(sum1 > sum2){
+                endnum--;
+                sum2 += endnum;
+            }
+            else{
+                stnum++;
+                endnum--;
+                sum1 += stnum;
+                sum2 += endnum;
+            }
+        }
+        return -1;
+    }
+}
