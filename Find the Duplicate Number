@@ -1,0 +1,17 @@
+//LeetCode 287
+//Find the Duplicate Number -- Medium
+//using constant space (two-poniter approach)
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int idx = 0;
+        while(idx < n-1){
+            if(nums[idx] == nums[idx+1]){
+                return nums[idx];
+            }
+            idx++;
+        }
+        return nums[idx];
+    }
+}
